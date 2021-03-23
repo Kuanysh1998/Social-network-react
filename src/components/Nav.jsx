@@ -1,10 +1,12 @@
+import classes from  "./Nav.module.css"
+console.log(classes)
 function Nav() {
-    return <nav className="nav">
-    <div><a>Profile</a></div>
-    <div><a>Messages</a></div>
-    <div><a>News</a></div>
-    <div><a>Music</a></div>
-    <div><a>Settings</a></div>
+    return <nav className={classes.nav}>
+    <div className={classes.item} ><a>Profile</a></div>
+    <div className={classes.item}><a>Messages</a></div>
+    <div className={classes.item}><a>News</a></div>
+    <div className={classes.item}><a>Music</a></div>
+    <div className={classes.item}><a>Settings</a></div>
 
   </nav>
 }
