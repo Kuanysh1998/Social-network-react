@@ -1,11 +1,11 @@
 import classes from "./Post.module.css"
 
-function Post() {
+function Post(props) {
     return (
             <div className={classes.item}>
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWJ-KpJMjDpBlfSCIvH0k5kj5t3BUm6_pJpA&usqp=CAU"/>
-            post 1
-            <div><span>like</span></div>
+            {props.message}
+            <div><span>{props.likes}</span></div>
             
             </div>
             

@@ -12,8 +12,9 @@ function MyPosts() {
                 <button>Add post</button>
             </div>
             <div className={classes.posts}>
-                <Post />
-                <Post />
+                <Post message = "I am learning React now))" likes = "77 likes"/>
+                <Post message = "What are you doing?" likes = "25 likes"/>
+                
             </div>
         </div>
     )
