@@ -1,3 +1,18 @@
-.item {
-    color: white;
+.dialogs {
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+}
+
+
+.dialog {
+    padding: 16px;
+}
+
+.message {
+    padding: 16px;
+}
+
+.dialogsItems a{
+    color: yellow;
+    text-decoration: none;
 }

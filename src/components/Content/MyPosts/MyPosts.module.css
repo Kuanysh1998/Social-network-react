@@ -1,3 +1,7 @@
 .item {
     color: green;
+    padding: 10px;
+}
+.posts, .addPost {
+    padding: 10px;
 }

@@ -4,12 +4,12 @@ import Post from "./Post/Post"
 function MyPosts() {
     return (
         <div className={classes.item}>
-            My posts
+            <h3>My posts</h3>
 
-            <div>
+            <div className={classes.addPost}>
 
-                <textarea></textarea>
-                <button>Add post</button>
+                <div><textarea></textarea></div>
+                <div><button>Add post</button></div>
             </div>
             <div className={classes.posts}>
                 <Post message = "I am learning React now))" likes = "77 likes"/>
