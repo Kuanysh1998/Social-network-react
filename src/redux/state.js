@@ -9,12 +9,10 @@ let state = {
     dialogsData: [
         { id: 1, name: 'Yernar' },
         { id: 2, name: 'Alisher' },
-        { id: 3, name: 'Takhmina' },
     ],
     messagesData: [
         { id: 1, message: 'Salam' },
         { id: 2, message: 'Kalaisyn?' },
-        { id: 3, message: 'Трахни меня Жаным' },
     ],},
     
 }
