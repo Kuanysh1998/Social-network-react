@@ -1,3 +1,5 @@
+import { renderApp } from "../render";
+
 let state = {
     ProfilePage: {
         postsData: [
@@ -15,6 +17,27 @@ let state = {
         { id: 2, message: 'Kalaisyn?' },
     ],},
     
+}
+
+export let addPost = (newPostText) => {
+    let newPost = {
+        id: 3, post: newPostText, likes: 0
+    }
+    state.ProfilePage.postsData.push(newPost);
+    renderApp(state);
+
+}
+
+export let writeMessage = (newMessageText) => {
+    let newMessage = {
+        id: 3, message: newMessageText
+    }
+    let newDialog = {
+        id:3, name: 'KOKSSS'
+    }
+    state.DialogsPage.dialogsData.push(newDialog);
+    state.DialogsPage.messagesData.push(newMessage);
+    renderApp(state);
 }
 
 export default state;

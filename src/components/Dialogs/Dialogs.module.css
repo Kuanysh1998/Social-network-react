@@ -16,3 +16,7 @@
     color: yellow;
     text-decoration: none;
 }
+
+button {
+    width: 50px;
+}
