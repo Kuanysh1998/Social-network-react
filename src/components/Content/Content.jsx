@@ -8,7 +8,11 @@ function Content(props) {
     return <div className={classes.content}>
         
         <ProfileInfo />
-        <MyPosts postsData = {props.state.postsData} addPost={props.addPost}/>
+        <MyPosts
+        postsData = {props.ProfilePage.postsData} 
+        addPost={props.addPost} 
+        newPostText={props.ProfilePage.newPostText} 
+        updateNewPostText={props.updateNewPostText}/>
 
         </div>
       

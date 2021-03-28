@@ -5,7 +5,10 @@ let state = {
         postsData: [
         { id: 1, post: "I am learning React now))", likes: 777 },
         { id: 2, post: "What are you doing?", likes: 143 },
-    ]
+    ],
+        
+
+        newPostText: "Kuanysh number 1"
 },
     DialogsPage: {
     dialogsData: [
@@ -19,13 +22,19 @@ let state = {
     
 }
 
-export let addPost = (newPostText) => {
+export let addPost = () => {
     let newPost = {
-        id: 3, post: newPostText, likes: 0
+        id: 3, post: state.ProfilePage.newPostText, likes: 0
     }
     state.ProfilePage.postsData.push(newPost);
+    state.ProfilePage.newPostText = "";
     renderApp(state);
 
+}
+
+export let updateNewPostText = (newText) => {
+    state.ProfilePage.newPostText = newText;
+    renderApp(state);
 }
 
 export let writeMessage = (newMessageText) => {
