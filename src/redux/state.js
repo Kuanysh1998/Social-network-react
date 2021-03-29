@@ -10,7 +10,7 @@ let state = {
         
 
         newPostText: "Kuanysh number 1"
-},
+},  
     DialogsPage: {
     dialogsData: [
         { id: 1, name: 'Yernar' },
@@ -59,7 +59,7 @@ export let updateNewMessageText = (newMessage) => {
     renderApp(state);
 }
 
-export const subscriber = (observer) => {
+export const subscribe = (observer) => {
     renderApp = observer;
 }
 export default state;
