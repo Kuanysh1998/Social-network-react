@@ -40,15 +40,16 @@ export let updateNewPostText = (newText) => {
     renderApp(state);
 }
 
-export let writeMessage = (newMessageText) => {
+export let writeMessage = () => {
     let newMessage = {
-        id: 3, message: newMessageText
+        id: 3, message: state.DialogsPage.newMessageText
     }
     let newDialog = {
         id:3, name: 'KOKSSS'
     }
     state.DialogsPage.dialogsData.push(newDialog);
     state.DialogsPage.messagesData.push(newMessage);
+    state.DialogsPage.newMessageText = "";
     renderApp(state);
 }
 
