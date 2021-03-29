@@ -18,7 +18,10 @@ let state = {
     messagesData: [
         { id: 1, message: 'Salam' },
         { id: 2, message: 'Kalaisyn?' },
-    ],},
+    ],
+    newMessageText: "test"
+
+},
     
 }
 
@@ -46,6 +49,11 @@ export let writeMessage = (newMessageText) => {
     }
     state.DialogsPage.dialogsData.push(newDialog);
     state.DialogsPage.messagesData.push(newMessage);
+    renderApp(state);
+}
+
+export let updateNewMessageText = (newMessage) => {
+    state.DialogsPage.newMessageText = newMessage;
     renderApp(state);
 }
 

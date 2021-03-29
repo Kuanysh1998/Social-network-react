@@ -6,15 +6,19 @@ import Message from "./Message/Message";
 
 function Dialogs(props) {
     
-    let dialogsElements = props.state.dialogsData.map(el => < DialogsItems name = {el.name} id = {el.id} />);
+    let dialogsElements = props.DialogsPage.dialogsData.map(el => < DialogsItems name = {el.name} id = {el.id} />);
 
-    let messagesElements = props.state.messagesData.map(el => < Message message={el.message}/>);
+    let messagesElements = props.DialogsPage.messagesData.map(el => < Message message={el.message}/>);
 
     let newMessage = React.createRef();
     let writeNewMessage = () => {
+        
+        props.writeMessage();
+       
+    }
+    let onMessageChange = () => {
         let text = newMessage.current.value;
-        props.writeMessage(text);
-        newMessage.current.value = "";
+        props.updateNewMessageText(text);
     }
     return (
         <div className={classes.dialogs}>
@@ -26,7 +30,7 @@ function Dialogs(props) {
                 {messagesElements}
                 
             </div>
-            <textarea ref={newMessage}></textarea>
+            <textarea ref={newMessage} onChange={onMessageChange} value={props.DialogsPage.newMessageText}></textarea>
             <button onClick={writeNewMessage}>Write</button>
         </div>
     )
