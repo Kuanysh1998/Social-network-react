@@ -10,9 +10,9 @@ function Content(props) {
         <ProfileInfo />
         <MyPosts
         postsData = {props.ProfilePage.postsData} 
-        addPost={props.addPost} 
-        newPostText={props.ProfilePage.newPostText} 
-        updateNewPostText={props.updateNewPostText}/>
+        newPostText={props.ProfilePage.newPostText}
+        dispatch = {props.dispatch} 
+        />
 
         </div>
       
