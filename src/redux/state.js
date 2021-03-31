@@ -1,3 +1,6 @@
+import dialogsPageReducer from "./dialogs-page-reducer";
+import profilePageReducer from "./profile-page-reducer";
+
 let store = {
     _state: {
         ProfilePage: {
@@ -37,61 +40,15 @@ let store = {
 
 
     dispatch(action) {
-        if(action.type === ADD_POST){
-            let newPost = {
-                id: 3, post: this._state.ProfilePage.newPostText, likes: 0
-            }
-            this._state.ProfilePage.postsData.push(newPost);
-            this._state.ProfilePage.newPostText = "";
-            this._callSubscriber(this._state);
+        this._state.ProfilePage = profilePageReducer(this._state.ProfilePage, action);
+        this._state.DialogsPage = dialogsPageReducer(this._state.DialogsPage, action);
+        this._callSubscriber(this._state);
         
 
-        }else if (action.type === UPDATE_NEW_POST_TEXT){
-            this._state.ProfilePage.newPostText = action.newText;
-            this._callSubscriber(this._state);
-
-        }else if (action.type === WRITE_MESSAGE){
-               
-            let newMessage = {
-                id: 3, message: this._state.DialogsPage.newMessageText
-            }
-            let newDialog = {
-                id:3, name: 'KOKSSS'
-            }
-            this._state.DialogsPage.dialogsData.push(newDialog);
-            this._state.DialogsPage.messagesData.push(newMessage);
-            this._state.DialogsPage.newMessageText = "";
-            this._callSubscriber(this._state);
-        }else if(action.type === UPDATE_NEW_MESSAGE_TEXT){
-            
-            this._state.DialogsPage.newMessageText = action.newMessage;
-            this._callSubscriber(this._state);
-        }
-
-    }
-
 
 
 }
 
-const ADD_POST = "ADD-POST"
-const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT"
-const WRITE_MESSAGE = "WRITE-MESSAGE"
-const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT"
-
-export let addPostActionCreator = () => {
-    return {type: ADD_POST}
 }
-
-export let updateNewPostTextActionCreator = (text) => {
-    return {type: UPDATE_NEW_POST_TEXT ,newText: text}
-}
-
-export let writeMessageActionCreator = () => {
-    return {type: WRITE_MESSAGE}
-}
-
-export let updateNewMessageTextActionCreator = (text) =>{
-    return {type: UPDATE_NEW_MESSAGE_TEXT, newMessage: text}
-}
+    
 export default store;
