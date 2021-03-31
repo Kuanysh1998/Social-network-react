@@ -1,7 +1,20 @@
 const WRITE_MESSAGE = "WRITE-MESSAGE"
 const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT"
 
-const dialogsPageReducer = (state, action) => {
+let initialState = {
+    dialogsData: [
+        { id: 1, name: 'Yernar' },
+        { id: 2, name: 'Alisher' },
+    ],
+    messagesData: [
+        { id: 1, message: 'Salam' },
+        { id: 2, message: 'Kalaisyn?' },
+    ],
+    newMessageText: "test"
+
+}
+
+const dialogsPageReducer = (state = initialState, action) => {
     switch(action.type) {
         case WRITE_MESSAGE:
             let newMessage = {
@@ -22,7 +35,7 @@ const dialogsPageReducer = (state, action) => {
 
 
     }
-    
+        
 }
 
 export let writeMessageActionCreator = () => {
