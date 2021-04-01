@@ -11,8 +11,7 @@ let renderApp = (state) =>{
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter><App 
-    state = {state} 
-    dispatch = {store.dispatch.bind(store)}
+    store = {store}
    /></BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
@@ -22,6 +21,7 @@ ReactDOM.render(
 
 
 renderApp(store.getState());
+
 store.subscribe( () => {  
   renderApp(store.getState())
 });
