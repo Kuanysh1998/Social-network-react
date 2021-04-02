@@ -1,5 +1,5 @@
 import classes from "./Content.module.css"
-import MyPostsContainer from "./MyPosts/Post/MyPostsContainer";
+import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
 
