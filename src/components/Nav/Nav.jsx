@@ -8,6 +8,7 @@ function Nav() {
     <div className={classes.item}><NavLink to="/News" activeClassName={classes.currentLink}>News</NavLink></div>
     <div className={classes.item}><NavLink to="/Music" activeClassName={classes.currentLink}>Music</NavLink></div>
     <div className={classes.item}><NavLink to="/Settings" activeClassName={classes.currentLink}> Settings</NavLink></div>
+    <div className={classes.item}><NavLink to="/Users" activeClassName={classes.currentLink}> Users</NavLink></div>
 
   </nav>
 }
