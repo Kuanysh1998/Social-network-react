@@ -1,43 +1,17 @@
 const FOLLOW = "Follow";
 const UNFOLLOW = "Unfollow";
-const SET_USERS = ""
+const SET_USERS = "SetUsers";
 
 let initialState = {
-    usersData: [
-        {
-            id: 5, fullName: "Koshpanov K",
-            status: "I am learning React now))",
-            location: { city: "Almaty", country: "Kazakhstan" },
-            followed: true,
-            avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQKKRKtIclHzNaaIEb1rmkQ_EINss4gNoO0Q&usqp=CAU"
-        },
-        {
-            id: 6,
-            fullName: "Tasanov A",
-            status: "I am professional back-end developer",
-            location: { city: "Almaty", country: "Kazakhstan" },
-            followed: true,
-            avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvozOTNpY3Tw0GI2D4wgZcb1ELfixMYf8u8Q&usqp=CAU"
-        },
-        {
-            id: 7,
-            fullName: "Akuov Y",
-            status: "playing CS:GO",
-            location: { city: "Almaty", country: "Kazakhstan" },
-            followed: true,
-            avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4tDUNd_EwQn3F0r6t8IR07a9ZYmKOzbzIYw&usqp=CAU"
-        },
-        {
-            id: 8,
-            fullName: "Kostylev",
-            status: "top 1 player in the world",
-            location: { city: "Kiev", country: "Ukraine" },
-            followed: false,
-            avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmnCUyWbhmvT-ucN82qq-wfjV7z4tkC7u0qg&usqp=CAU"
-        }
-        ]
+    usersData:[
+        
+        
+    ]
+     
          
 }
+
+
 
 
 const usersPageReducer = (state = initialState, action) => {
@@ -66,7 +40,8 @@ const usersPageReducer = (state = initialState, action) => {
         
 
         case SET_USERS: {
-            return {...state, usersData: [...state.usersData, action.usersData]}
+            
+            return {...state, usersData: [...state.usersData, ...action.users]}
         }
         default:
             return state;
