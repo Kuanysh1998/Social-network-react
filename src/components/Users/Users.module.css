@@ -3,5 +3,15 @@
     height: 100px;
 }
 button {
-    width: 100px;;
+    width: 100px;
+}
+
+.selectedPage {
+    color: red;
+    font-size: 20px;
+}
+
+.goBack {
+    width: 12px;
+    padding-left: 0;
 }
