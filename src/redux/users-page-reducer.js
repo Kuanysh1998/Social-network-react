@@ -1,11 +1,10 @@
-import * as axios from "axios";
-
 const FOLLOW = "Follow";
 const UNFOLLOW = "Unfollow";
 const SET_USERS = "SetUsers";
 const SET_CURRENT_PAGE = "SetCurrentPage";
 const SET_TOTAL_COUNT_OF_USERS = "SetTotalCountOfUsers";
 const GO_BACK_ACTION_CREATOR = "GoBackActionCreator";
+const TOGGLE_IS_FETCHING = "ToggleIsFetching";
 
 
 let initialState = {
@@ -13,6 +12,7 @@ let initialState = {
     totalCountOfUsers: 10,
     pageSize: 5,
     currentPage: 1,
+    isFetching: false
      
          
 }
@@ -68,6 +68,12 @@ const usersPageReducer = (state = initialState, action) => {
                 ...state, currentPage: action.currentPage - 5
             }
         }
+
+        case TOGGLE_IS_FETCHING: {
+            return {
+                ...state, isFetching: action.fetching
+            }
+        }
         default:
             return state;
     }
@@ -99,5 +105,9 @@ export const setTotalCountOfUsersActionCreator = (usersAmount) => {
 
 export const goBackActionCreator = (currentPage) => {
     return {type: GO_BACK_ACTION_CREATOR, currentPage}
+}
+
+export const toggleIsFetchingActionCreator = (fetching) => {
+    return {type: TOGGLE_IS_FETCHING, fetching}
 }
 export default usersPageReducer;
