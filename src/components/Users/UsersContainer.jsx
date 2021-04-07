@@ -1,4 +1,4 @@
-import { followActionCreator, goBackActionCreator, setCurrentPageActionCreator, setTotalCountOfUsersActionCreator, setUsersActionCreator, unfollowActionCreator, toggleIsFetchingActionCreator } from "../../redux/users-page-reducer"
+import { follow, goBackPages, setCurrentPage, setTotalCountOfUsers, setUsers, unfollow, usePreloader } from "../../redux/users-page-reducer"
 import Users from "./Users";
 import {connect} from "react-redux"
 import React from "react";
@@ -56,36 +56,6 @@ const mapStateToProps = (state) => {
 }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        follow: (userID) => {
-            let action = followActionCreator(userID);
-            dispatch(action);},
-        unfollow: (userID) => {
-            let action = unfollowActionCreator(userID);
-            dispatch(action);
-        },
-        setUsers: (users) => {
-            let action = setUsersActionCreator(users);
-            dispatch(action);
-        },
-        setCurrentPage: (pageNumber) => {
-            let action = setCurrentPageActionCreator(pageNumber);
-            dispatch(action);
-        },
-        setTotalCountOfUsers: (usersAmount) => {
-            let action = setTotalCountOfUsersActionCreator(usersAmount);
-            dispatch(action);
-        },
-        goBackPages: (currentPage) => {
-            let action = goBackActionCreator(currentPage);
-            dispatch(action);
-        },
-        usePreloader: (fetching) => {
-            let action = toggleIsFetchingActionCreator(fetching);
-            dispatch(action);
-        }
-
-    }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);
+export default connect(mapStateToProps, 
+    {follow, unfollow, setUsers,
+    setCurrentPage, setTotalCountOfUsers, goBackPages, usePreloader})(UsersContainer);

@@ -83,31 +83,31 @@ const usersPageReducer = (state = initialState, action) => {
             
             
 
-export const followActionCreator = (userID) => {
+export const follow = (userID) => {
     return {type: FOLLOW, userID}
 }
 
-export const unfollowActionCreator = (userID) => {
+export const unfollow = (userID) => {
     return {type: UNFOLLOW, userID}
 }
 
-export const setUsersActionCreator = (users) => {
+export const setUsers = (users) => {
     return {type: SET_USERS, users}
 } 
 
-export const setCurrentPageActionCreator = (pageNumber) => {
+export const setCurrentPage = (pageNumber) => {
     return {type: SET_CURRENT_PAGE, pageNumber}
 }
 
-export const setTotalCountOfUsersActionCreator = (usersAmount) => {
+export const setTotalCountOfUsers = (usersAmount) => {
     return {type: SET_TOTAL_COUNT_OF_USERS, usersAmount}
 }
 
-export const goBackActionCreator = (currentPage) => {
+export const goBackPages = (currentPage) => {
     return {type: GO_BACK_ACTION_CREATOR, currentPage}
 }
 
-export const toggleIsFetchingActionCreator = (fetching) => {
+export const usePreloader = (fetching) => {
     return {type: TOGGLE_IS_FETCHING, fetching}
 }
 export default usersPageReducer;
