@@ -2,15 +2,15 @@ import { follow, goBackPages, setCurrentPage, setTotalCountOfUsers, setUsers, un
 import Users from "./Users";
 import {connect} from "react-redux"
 import React from "react";
-import * as axios from "axios"
 import Preloader from "../common/Preloader/Preloader";
+import { usersAPI } from "../../api/api";
+
 
 class UsersContainer extends React.Component {
     componentDidMount(){
         this.props.usePreloader(true);
       
-            axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {withCredentials: true,
-        headers: {"API-KEY": "26f66adc-110c-4e66-9052-87a50836c7e0"}})
+            usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
                 .then(response=>{
                     this.props.usePreloader(false);
                     this.props.setUsers(response.data.items);
@@ -22,8 +22,7 @@ class UsersContainer extends React.Component {
     onPageChanged = (p) => {
         this.props.usePreloader(true);
         this.props.setCurrentPage(p);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${p}&count=${this.props.pageSize}`, {withCredentials: true,
-        headers: {"API-KEY": "26f66adc-110c-4e66-9052-87a50836c7e0"}})
+        usersAPI.getUsers(p, this.props.pageSize) 
         .then(response=>{
             this.props.usePreloader(false);
             this.props.setUsers(response.data.items)})
