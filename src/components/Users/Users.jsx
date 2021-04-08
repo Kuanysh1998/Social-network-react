@@ -2,11 +2,10 @@ import React from "react";
 import classes from "./Users.module.css";
 import noPhoto from "../../assets/images/unnamed.png"
 import { NavLink } from "react-router-dom";
-import * as axios from "axios";
-import { unfollowUserApi, usersAPI } from "../../api/api";
+
+import { usersAPI } from "../../api/api";
 
 function Users(props) {
-   
         let pagesAmount = Math.ceil(props.totalCountOfUsers / props.pageSize);
         let pages = [];
         if(props.currentPage < 10){
@@ -38,22 +37,29 @@ function Users(props) {
                    <NavLink to = {"/Content/" + u.id}> <img className={classes.avatar} src={u.photos.small != null ? u.photos.small : noPhoto} /> </NavLink>
                 </div>
                 <div>{u.followed === true ?
-                    <button onClick={() => {
+                    <button disabled = {props.followingInProcess.some(id=> id === u.id)} onClick={() => {
                         
+                        props.disableFollowBtn(true, u.id);
                         usersAPI.unfollowUser(u.id)
                         .then(response => {
                             if(response.data.resultCode ===0){
-                            props.unfollow(u.id) }})
+                            props.unfollow(u.id) }
+                        props.disableFollowBtn(false, u.id)
+                        })
+                     
                         
                         
                         
                         
                         }}>unfollow</button>
-                    : <button onClick={() => { 
+                    : <button disabled = {props.followingInProcess.some(id=> id === u.id)} onClick={() => { 
+                        props.disableFollowBtn(true, u.id);
                         usersAPI.followUser(u.id)
                         .then(response => {
                             if(response.data.resultCode ===0){
-                            props.follow(u.id) }})
+                            props.follow(u.id) }
+                        props.disableFollowBtn(false, u.id)
+                        })
                         
                     }}>follow</button>
 

@@ -5,14 +5,16 @@ const SET_CURRENT_PAGE = "SetCurrentPage";
 const SET_TOTAL_COUNT_OF_USERS = "SetTotalCountOfUsers";
 const GO_BACK_ACTION_CREATOR = "GoBackActionCreator";
 const TOGGLE_IS_FETCHING = "ToggleIsFetching";
-
+const TOGGLE_IS_FOLLOWING = "ToggleIsFollowing";
 
 let initialState = {
     usersData:[],
     totalCountOfUsers: 10,
     pageSize: 5,
     currentPage: 1,
-    isFetching: false
+    isFetching: false,
+    followingInProcess: [],
+    
      
          
 }
@@ -74,6 +76,14 @@ const usersPageReducer = (state = initialState, action) => {
                 ...state, isFetching: action.fetching
             }
         }
+
+        case TOGGLE_IS_FOLLOWING: {
+            return {
+                ...state, followingInProcess: action.isFollowing 
+                ? [...state.followingInProcess, action.userId]
+                : state.followingInProcess.filter(id => id != action.userId)
+            }
+        }
         default:
             return state;
     }
@@ -109,5 +119,9 @@ export const goBackPages = (currentPage) => {
 
 export const usePreloader = (fetching) => {
     return {type: TOGGLE_IS_FETCHING, fetching}
+}
+
+export const disableFollowBtn = (isFollowing, userId) => {
+    return {type: TOGGLE_IS_FOLLOWING, isFollowing, userId}
 }
 export default usersPageReducer;

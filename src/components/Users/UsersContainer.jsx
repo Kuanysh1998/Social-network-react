@@ -1,4 +1,4 @@
-import { follow, goBackPages, setCurrentPage, setTotalCountOfUsers, setUsers, unfollow, usePreloader } from "../../redux/users-page-reducer"
+import { follow, goBackPages, setCurrentPage, setTotalCountOfUsers, setUsers, unfollow, usePreloader, disableFollowBtn } from "../../redux/users-page-reducer"
 import Users from "./Users";
 import {connect} from "react-redux"
 import React from "react";
@@ -41,7 +41,9 @@ class UsersContainer extends React.Component {
     follow = {this.props.follow}
     unfollow = {this.props.unfollow }
     usersData = {this.props.usersData} 
-    usePreloader = {this.props.usePreloader}/> 
+    usePreloader = {this.props.usePreloader}
+    disableFollowBtn = {this.props.disableFollowBtn}
+    followingInProcess = {this.props.followingInProcess}/> 
     </>
 }
 }
@@ -53,10 +55,11 @@ const mapStateToProps = (state) => {
         totalCountOfUsers: state.UsersPage.totalCountOfUsers,
         pageSize: state.UsersPage.pageSize,
         currentPage: state.UsersPage.currentPage,
-        isFetching: state.UsersPage.isFetching
+        isFetching: state.UsersPage.isFetching,
+        followingInProcess: state.UsersPage.followingInProcess
 }
 }
 
 export default connect(mapStateToProps, 
     {follow, unfollow, setUsers,
-    setCurrentPage, setTotalCountOfUsers, goBackPages, usePreloader})(UsersContainer);
+    setCurrentPage, setTotalCountOfUsers, goBackPages, usePreloader, disableFollowBtn})(UsersContainer);
