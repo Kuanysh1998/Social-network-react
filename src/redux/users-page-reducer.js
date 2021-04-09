@@ -1,3 +1,5 @@
+import { usersAPI } from "../api/api";
+
 const FOLLOW = "Follow";
 const UNFOLLOW = "Unfollow";
 const SET_USERS = "SetUsers";
@@ -6,6 +8,7 @@ const SET_TOTAL_COUNT_OF_USERS = "SetTotalCountOfUsers";
 const GO_BACK_ACTION_CREATOR = "GoBackActionCreator";
 const TOGGLE_IS_FETCHING = "ToggleIsFetching";
 const TOGGLE_IS_FOLLOWING = "ToggleIsFollowing";
+
 
 let initialState = {
     usersData:[],
@@ -89,15 +92,66 @@ const usersPageReducer = (state = initialState, action) => {
     }
 }
 
+export const getUsers = (currentPage, pageSize) => {
+return (dispatch) => {
+    dispatch(usePreloader(true));
+      
+    usersAPI.getUsers(currentPage, pageSize)
+        .then(response=>{
+            dispatch(usePreloader(false));
+            dispatch(setUsers(response.data.items));
+            dispatch(setTotalCountOfUsers(response.data.totalCount));
+        })
+}
+}
+
+export const getNewPageUsers = (p, pageSize) => {
+    return (dispatch) => {
+        dispatch(usePreloader(true));
+        dispatch(setCurrentPage(p));
+        usersAPI.getUsers(p, pageSize) 
+        .then(response=>{
+            dispatch(usePreloader(false));
+            dispatch(setUsers(response.data.items))
+        })
+    }
+    }
+
+export const follow = (userId) => {
+    return (dispatch) => {
+        dispatch(disableFollowBtn(true, userId));
+        usersAPI.followUser(userId)
+        .then(response => {
+            if(response.data.resultCode ===0){
+            dispatch(followOK(userId) )}
+            dispatch(disableFollowBtn(false, userId))
+        })
+
+    }
+}
+
+export const unfollow = (userId) => {
+    return (dispatch) => {
+        dispatch(disableFollowBtn(true, userId));
+        usersAPI.unfollowUser(userId)
+        .then(response => {
+            if(response.data.resultCode ===0){
+            dispatch(unfollowOK(userId) )}
+            dispatch(disableFollowBtn(false, userId))
+        })
+
+    }
+}
+
 
             
             
 
-export const follow = (userID) => {
+export const followOK = (userID) => {
     return {type: FOLLOW, userID}
 }
 
-export const unfollow = (userID) => {
+export const unfollowOK = (userID) => {
     return {type: UNFOLLOW, userID}
 }
 

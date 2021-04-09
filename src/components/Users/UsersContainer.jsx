@@ -1,31 +1,17 @@
-import { follow, goBackPages, setCurrentPage, setTotalCountOfUsers, setUsers, unfollow, usePreloader, disableFollowBtn } from "../../redux/users-page-reducer"
+import { follow, goBackPages, setTotalCountOfUsers, unfollow, disableFollowBtn, getUsers, getNewPageUsers} from "../../redux/users-page-reducer"
 import Users from "./Users";
 import {connect} from "react-redux"
 import React from "react";
 import Preloader from "../common/Preloader/Preloader";
-import { usersAPI } from "../../api/api";
-
 
 class UsersContainer extends React.Component {
     componentDidMount(){
-        this.props.usePreloader(true);
-      
-            usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
-                .then(response=>{
-                    this.props.usePreloader(false);
-                    this.props.setUsers(response.data.items);
-                    this.props.setTotalCountOfUsers(response.data.totalCount);
-                })
+        this.props.getUsers(this.props.currentPage, this.props.pageSize)
         }
     
 
     onPageChanged = (p) => {
-        this.props.usePreloader(true);
-        this.props.setCurrentPage(p);
-        usersAPI.getUsers(p, this.props.pageSize) 
-        .then(response=>{
-            this.props.usePreloader(false);
-            this.props.setUsers(response.data.items)})
+        this.props.getNewPageUsers(p, this.props.pageSize)
 
     }
 
@@ -42,8 +28,8 @@ class UsersContainer extends React.Component {
     unfollow = {this.props.unfollow }
     usersData = {this.props.usersData} 
     usePreloader = {this.props.usePreloader}
-    disableFollowBtn = {this.props.disableFollowBtn}
-    followingInProcess = {this.props.followingInProcess}/> 
+    followingInProcess = {this.props.followingInProcess}
+    /> 
     </>
 }
 }
@@ -61,5 +47,5 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, 
-    {follow, unfollow, setUsers,
-    setCurrentPage, setTotalCountOfUsers, goBackPages, usePreloader, disableFollowBtn})(UsersContainer);
+    {follow, unfollow, 
+     setTotalCountOfUsers, goBackPages, disableFollowBtn, getUsers, getNewPageUsers})(UsersContainer);

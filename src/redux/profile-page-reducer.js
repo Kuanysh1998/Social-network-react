@@ -1,3 +1,5 @@
+import {usersAPI} from "../api/api"
+
 const ADD_POST = "ADD-POST"
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT"
 const SET_PROFILE_PHOTO = "SET-PROFILE-PHOTO"
@@ -43,6 +45,19 @@ const profilePageReducer = (state = initialState, action) => {
     }
     
 }
+
+
+export const getProfile = (userId) => {return (dispatch) =>{
+    usersAPI.getProfile(userId)
+        .then(response => {
+            dispatch(setProfilePhoto(response.data))
+        })
+
+}
+}
+
+
+
 
 export let addPostActionCreator = () => {
     return {type: ADD_POST}
