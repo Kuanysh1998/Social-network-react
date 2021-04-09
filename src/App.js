@@ -8,6 +8,7 @@ import DialogsContainer from './components/Dialogs/DialogsContainer';
 import UsersContainer from './components/Users/UsersContainer';
 import ContentContainer from './components/Content/ContentContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
+import Login from './components/common/Login/Login';
 
 
 function App(props) {
@@ -23,6 +24,8 @@ function App(props) {
         <Route path="/Dialogs" render={() => <DialogsContainer
         store = {props.store}/>} />
         <Route path="/Users" render = { () => <UsersContainer 
+        store = {props.store}/>} />
+        <Route path="/Login" render = { () => <Login
         store = {props.store}/>} />
         <Route path="/News" component={News} />
         <Route path="/Music" component={Music} />
