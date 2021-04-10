@@ -19,7 +19,7 @@ function ProfileInfo(props) {
                 
                 <p>{`Описание: ${props.profile.lookingForAJobDescription}`} </p>
             </div>  
-            <ProfileStatus status = {props.status} />
+            <ProfileStatus status = {props.status} updateProfileStatus = {props.updateProfileStatus}/>
             </div>
        
             </div>

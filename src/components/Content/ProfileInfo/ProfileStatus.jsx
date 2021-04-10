@@ -1,9 +1,10 @@
 import React from "react";
 
-class ProfileStatus extends React.Component {
+class   ProfileStatus extends React.Component {
 
     state = {
-        editMode: false
+        editMode: false,
+        status: this.props.status
     }
 
     activateEditMode() {
@@ -15,8 +16,23 @@ class ProfileStatus extends React.Component {
         this.setState({
             editMode: false
         })
+        this.props.updateProfileStatus(this.state.status)
     }
 
+    onStatusChange = (event) => {
+        this.setState({
+            status: event.currentTarget.value
+        })
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.status !== this.props.status){
+            this.setState({
+                status: this.props.state
+            });
+        }
+        
+    }
     render() {
     if(!this.state.editMode){
     return <div> 
@@ -25,7 +41,7 @@ class ProfileStatus extends React.Component {
     }
     if(this.state.editMode){
         return <div> 
-        <textarea autoFocus={true} onBlur={this.deactivateEditMode.bind(this)}>{this.props.status}</textarea>
+        <textarea onChange = {this.onStatusChange} autoFocus={true} onBlur={this.deactivateEditMode.bind(this)}>{this.props.status}</textarea>
     </div>
     }
 }

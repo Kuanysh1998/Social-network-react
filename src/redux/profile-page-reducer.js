@@ -4,6 +4,7 @@ const ADD_POST = "ADD-POST"
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT"
 const SET_PROFILE_PHOTO = "SET-PROFILE-PHOTO"
 const SET_USER_STATUS = "SET-USER-STATUS"
+const UPDATE_USER_STATUS = "UPDATE-USER-STATUS"
 let initialState = {
     postsData: [
     { id: 1, post: "I am learning React now))", likes: 777 },
@@ -47,6 +48,11 @@ const profilePageReducer = (state = initialState, action) => {
                 ...state, userStatus: action.status
             }
         }
+        case UPDATE_USER_STATUS: {
+            return {
+                ...state, userStatus: action.status
+            }
+        }
         default:
             return state;
     }
@@ -73,6 +79,17 @@ export const getProfileStatus = (userId) => {return (dispatch) =>{
 }
 }
 
+export const updateProfileStatus = (status) => {return (dispatch) =>{
+    usersAPI.setProfileStatus(status)
+        .then(response => {
+            if(response.data.resultCode === 0){
+            dispatch(updateUserStatus(status))
+            }
+        })
+
+}
+}
+
 
 
 
@@ -90,5 +107,9 @@ export let setProfilePhoto = (profile) => {
 
 export let setUserStatus = (status) => {
     return {type: SET_USER_STATUS, status}
+}
+
+export let updateUserStatus = (status) => {
+    return {type: UPDATE_USER_STATUS, status}
 }
 export default profilePageReducer;

@@ -7,7 +7,7 @@ function Content(props) {
     
     return <div className={classes.content}>
         
-        <ProfileInfo profile = {props.profile} status = {props.status}/>
+        <ProfileInfo profile = {props.profile} status = {props.status} updateProfileStatus = {props.updateProfileStatus}/>
         <MyPostsContainer store = {props.store}
         />
 
