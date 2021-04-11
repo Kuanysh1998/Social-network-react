@@ -52,6 +52,17 @@ export const login = (formData) => {
     }
 }
 
+export const logout = () => {
+    return (dispatch) => {
+        usersAPI.logout()
+        .then(response => {
+            if (response.data.resultCode === 0){
+                dispatch(setAuthUserData(null, null, null, false))
+            }
+        })
+    }
+}
+
 export const setAuthUserData = (userId, email, login, isAuth) => {
     return {type: SET_USER_DATA, data: {userId, email, login}, isAuth}
 }

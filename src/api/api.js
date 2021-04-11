@@ -36,6 +36,10 @@ export const  usersAPI = {
     },
     authorize(formData) {
         return instance.post("auth/login", formData)
+    },
+
+    logout() {
+        return instance.delete("auth/login")
     }
 
         
