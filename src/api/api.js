@@ -33,6 +33,9 @@ export const  usersAPI = {
 
     setProfileStatus(status) {
         return instance.put("profile/status", {status: status})
+    },
+    authorize(formData) {
+        return instance.post("auth/login", formData)
     }
 
         
