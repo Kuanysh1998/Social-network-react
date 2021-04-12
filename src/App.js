@@ -1,6 +1,6 @@
 import './App.css';
 import Nav from './components/Nav/Nav';
-import { Route } from 'react-router';
+import { Route, withRouter } from 'react-router';
 import News from './components/News/News';
 import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
@@ -9,10 +9,21 @@ import UsersContainer from './components/Users/UsersContainer';
 import ContentContainer from './components/Content/ContentContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import Login from './components/common/Login/Login';
+import React from 'react';
+import {initializeApp} from "./redux/app-reducer";
+import {connect} from "react-redux" 
+import { compose } from 'redux';
+import Preloader from './components/common/Preloader/Preloader';
 
 
-function App(props) {
-
+class App extends React.Component {
+  componentDidMount() {
+    this.props.initializeApp()
+  }
+  render() {
+    if(!this.props.appInitialized) {
+      return <Preloader />
+    }
   return (
     <div className="app-wrapper">
       <HeaderContainer />
@@ -20,13 +31,13 @@ function App(props) {
       <Nav />
       <div className="app-wrapper-content">
         <Route path="/Content/:userId?" render={() => <ContentContainer
-        store = {props.store}/>} />
+        />} />
         <Route path="/Dialogs" render={() => <DialogsContainer
-        store = {props.store}/>} />
+        />} />
         <Route path="/Users" render = { () => <UsersContainer 
-        store = {props.store}/>} />
+        />} />
         <Route path="/Login" render = { () => <Login
-        store = {props.store}/>} />
+       />} />
         <Route path="/News" component={News} />
         <Route path="/Music" component={Music} />
         <Route path="/Settings" component={Settings} />
@@ -35,5 +46,17 @@ function App(props) {
 
   );
 }
+}
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+      appInitialized: state.App.appInitialized
+  }
+} 
+
+export default compose(
+  withRouter,
+  connect(mapStateToProps, {initializeApp}))(App)
+
+
+

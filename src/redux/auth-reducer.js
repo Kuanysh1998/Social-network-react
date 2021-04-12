@@ -28,7 +28,7 @@ const authReducer = (state = initialState, action) => {
 
 export const getUsersAuthInfo = () => {
     return (dispatch) => {
-    usersAPI.getUserAuthInfo()
+    return usersAPI.getUserAuthInfo()
     .then(response => {
         if(response.data.resultCode === 0){
 

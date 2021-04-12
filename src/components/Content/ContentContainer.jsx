@@ -11,7 +11,10 @@ class ContentContainer extends React.Component {
     componentDidMount() {
         let userId = this.props.match.params.userId
         if(!userId) {
-            userId = 16301
+            userId = this.props.userId;
+            if(!userId) {
+                this.props.history.push('/login')
+            }
         }
         this.props.getProfile(userId)
         this.props.getProfileStatus(userId)
@@ -19,7 +22,8 @@ class ContentContainer extends React.Component {
     render() {
         if(!this.props.isAuth) {return <Redirect to = {"/Login"} />}
         
-        return <Content {...this.props} profile = {this.props.profile} updateProfileStatus = {this.props.updateProfileStatus}/>
+        return <Content {...this.props} profile = {this.props.profile} updateProfileStatus = {this.props.updateProfileStatus}
+        />
     }
 
 }
@@ -28,7 +32,8 @@ const mapStateToProps = (state) => {
     return {
         profile: state.ProfilePage.profile,
         isAuth: state.Auth.isAuth,
-        status: state.ProfilePage.userStatus
+        status: state.ProfilePage.userStatus,
+        userId: state.Auth.userId
 
 }
 }

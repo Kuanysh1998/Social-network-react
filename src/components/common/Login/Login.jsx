@@ -1,6 +1,5 @@
 import { Form, Formik, Field, ErrorMessage} from "formik"
 import * as Yup from "yup"
-import { usersAPI } from "../../../api/api"
 import { login } from "../../../redux/auth-reducer"
 import classes from "./Login.module.css"
 import {connect} from "react-redux"
@@ -10,7 +9,7 @@ import { Redirect } from "react-router"
 function Login (props) {        
 
     if(props.isAuth) {
-        return <Redirect to ={'/profile'}/>
+        return <Redirect to ={'/content'}/>
     }
     return <Formik initialValues = {{
         login: '',
