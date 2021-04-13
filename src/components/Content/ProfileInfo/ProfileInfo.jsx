@@ -6,7 +6,13 @@ function ProfileInfo(props) {
     if (!props.profile){
     return <Preloader />
 }
-
+        
+        let onFileSelected = (event) => {
+            if (event.target.files.length) {
+                props.setProfileAvatar(event.target.files[0])
+            }
+        }
+        console.log(props)
         return(
             <div>
             <div>
@@ -14,6 +20,8 @@ function ProfileInfo(props) {
             </div>
             <div className={classes.descriptionBlock}>
                 <img src = {props.profile.photos.large}></img>
+                {props.profile.userId === props.userId ? <input type = "file" 
+                onChange = {onFileSelected}></input> : null}
             <div>
                 <p>{`Полное имя: ${props.profile.fullName} `} </p>
                 

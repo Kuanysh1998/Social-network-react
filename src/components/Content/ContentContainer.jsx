@@ -1,7 +1,7 @@
 import Content from "./Content";
 import React from "react";
 import {connect} from "react-redux"
-import {getProfile, getProfileStatus, updateProfileStatus} from "../../redux/profile-page-reducer"
+import {getProfile, getProfileStatus, updateProfileStatus, setProfileAvatar} from "../../redux/profile-page-reducer"
 import { Redirect, withRouter } from "react-router";
 
 
@@ -23,6 +23,7 @@ class ContentContainer extends React.Component {
         if(!this.props.isAuth) {return <Redirect to = {"/Login"} />}
         
         return <Content {...this.props} profile = {this.props.profile} updateProfileStatus = {this.props.updateProfileStatus}
+        userId = {this.props.userId} setProfileAvatar = {this.props.setProfileAvatar}
         />
     }
 
@@ -39,4 +40,4 @@ const mapStateToProps = (state) => {
 }
 
 let withRouterContentContainer = withRouter(ContentContainer)
-export default connect(mapStateToProps,{getProfile, getProfileStatus, updateProfileStatus})(withRouterContentContainer);
+export default connect(mapStateToProps,{getProfile, getProfileStatus, updateProfileStatus, setProfileAvatar})(withRouterContentContainer);

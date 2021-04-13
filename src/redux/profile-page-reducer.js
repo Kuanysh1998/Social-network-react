@@ -5,6 +5,7 @@ const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT"
 const SET_PROFILE_PHOTO = "SET-PROFILE-PHOTO"
 const SET_USER_STATUS = "SET-USER-STATUS"
 const UPDATE_USER_STATUS = "UPDATE-USER-STATUS"
+const UPDATE_USER_AVATAR = "UPDATE-USER-AVATAR"
 let initialState = {
     postsData: [
     { id: 1, post: "I am learning React now))", likes: 777 },
@@ -15,6 +16,7 @@ let initialState = {
     newPostText: "Kuanysh number 1",
     profile: null,
     userStatus: null,
+    avatar: null
 }
 
 const profilePageReducer = (state = initialState, action) => {
@@ -51,6 +53,12 @@ const profilePageReducer = (state = initialState, action) => {
         case UPDATE_USER_STATUS: {
             return {
                 ...state, userStatus: action.status
+            }
+        }
+
+        case UPDATE_USER_AVATAR: {
+            return {
+                ...state, profile: {...state.profile}, photos:{...state.profile.photos, large: action.photo}
             }
         }
         default:
@@ -90,6 +98,19 @@ export const updateProfileStatus = (status) => {return (dispatch) =>{
 }
 }
 
+export const setProfileAvatar = (file) => {return (dispatch) =>{
+    usersAPI.setAvatar(file)
+        .then(response => {
+            if(response.data.resultCode === 0){
+            dispatch(setUserAvatar(response.data.data.photos.large))
+            
+            }
+        })
+ 
+}
+   
+}
+
 
 
 
@@ -111,5 +132,9 @@ export let setUserStatus = (status) => {
 
 export let updateUserStatus = (status) => {
     return {type: UPDATE_USER_STATUS, status}
+}
+
+export let setUserAvatar = (photo) => {
+    return {type: UPDATE_USER_AVATAR, photo }
 }
 export default profilePageReducer;
