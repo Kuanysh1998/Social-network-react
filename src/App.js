@@ -4,9 +4,9 @@ import { Route, withRouter } from 'react-router';
 import News from './components/News/News';
 import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
-import DialogsContainer from './components/Dialogs/DialogsContainer';
+//import DialogsContainer from './components/Dialogs/DialogsContainer';
 import UsersContainer from './components/Users/UsersContainer';
-import ContentContainer from './components/Content/ContentContainer';
+//import ContentContainer from './components/Content/ContentContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import Login from './components/common/Login/Login';
 import React from 'react';
@@ -14,6 +14,9 @@ import {initializeApp} from "./redux/app-reducer";
 import {connect} from "react-redux" 
 import { compose } from 'redux';
 import Preloader from './components/common/Preloader/Preloader';
+
+const DialogsContainer = React.lazy(()=> import ('./components/Dialogs/DialogsContainer'))
+const ContentContainer = React.lazy(()=> import ('./components/Content/ContentContainer'))
 
 
 class App extends React.Component {
@@ -30,10 +33,16 @@ class App extends React.Component {
 
       <Nav />
       <div className="app-wrapper-content">
-        <Route path="/Content/:userId?" render={() => <ContentContainer
-        />} />
-        <Route path="/Dialogs" render={() => <DialogsContainer
-        />} />
+        <Route path="/Content/:userId?" render={() => {
+          return <React.Suspense fallback = {<div>Loading...</div>}>
+            <ContentContainer />
+          </React.Suspense>
+        }}/>
+        <Route path="/Dialogs" render={() => {
+          return <React.Suspense fallback = {<div>Loading...</div>}>
+            <DialogsContainer />
+          </React.Suspense>
+        }}/>
         <Route path="/Users" render = { () => <UsersContainer 
         />} />
         <Route path="/Login" render = { () => <Login

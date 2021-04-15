@@ -12,7 +12,7 @@ function ProfileInfo(props) {
                 props.setProfileAvatar(event.target.files[0])
             }
         }
-        console.log(props)
+     
         return(
             <div>
             <div>
